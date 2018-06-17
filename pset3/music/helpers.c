@@ -14,11 +14,11 @@ int duration(string fraction)
 {
     if (fraction[0] == '1')
     {
-        if(fraction[2] == '1')
+        if (fraction[2] == '1')
         {
             return 1;
         }
-        else if(fraction[2] == '2')
+        else if (fraction[2] == '2')
         {
             return 4;
         }
@@ -46,7 +46,7 @@ int frequency(string note)
     int octave = note[strlen(note) - 1] - 48;
 
     double freq;
-    switch(note[0])
+    switch (note[0])
     {
         case 'C':
             freq = 440.0 / (pow(2.0, (9.0 / 12.0)));
@@ -67,7 +67,7 @@ int frequency(string note)
             freq = 440.0;
             break;
         case 'B':
-            freq = 440.0 * (pow(2.0, (1.0 / 12.0)));
+            freq = 440.0 * (pow(2.0, (2.0 / 12.0)));
             break;
         default :
             return 0;
@@ -91,20 +91,21 @@ int frequency(string note)
 
     if (note[1] == '#')
     {
-        freq /= pow(2.0, (1.0 / 12.0));
+        freq *= pow(2.0, (1.0 / 12.0));
     } 
     else if (note[1] == 'b')
     {
-        freq *= pow(2.0, (1.0 / 12.0));
+        freq /= pow(2.0, (1.0 / 12.0));
     }
 
-    return (int) freq;
+    int ret = round(freq);
+    return ret;
 }
 
 // Determines whether a string represents a rest
 bool is_rest(string s)
 {
-    if(strncmp(s, "\0", 1))
+    if (strncmp(s, "\0", 1))
     {
         return false;
     }
